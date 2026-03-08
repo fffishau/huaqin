@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華勤租賃有限公司 - 專業包車服務</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+            transition: all 0.3s ease;
+        }
+        body {
+            color: #334756;
+            line-height: 1.7;
+            /* 核心：固定背景圖設定 - 全屏、放大、不滑動、半透明遮罩保證文字可讀 */
+            background: url(https://travelss.net/wp-content/uploads/2024/12/image-283.jpg) no-repeat center center fixed;
+            background-size: cover; /* 放大鋪滿整屏，自動裁剪邊緣 */
+            position: relative;
+            min-height: 100vh;
+        }
+        /* 背景半透明遮罩，解決背景太亮/太暗導致文字看不清的問題，同時保留背景層次 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85); /* 白色半透明遮罩，可調整透明度 */
+            z-index: -1;
+        }
+        /* 頁首 - 輕盈旅行風 + 吸頂 */
+        header {
+            background-color: rgba(255, 255, 255, 0.95); /* 半透明背景，與整體融合 */
+            padding: 1.2rem 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+        .logo img {
+            height: 65px;
+            max-height: 85px;
+            border-radius: 8px;
+        }
+        .logo h1 {
+            font-size: 1.5rem;
+            color: #2a7886; /* 旅行風淺藍綠 */
+            text-align: center;
+            font-weight: 600;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.7rem 1.4rem;
+            border: none;
+            border-radius: 50px; /* 圓角按鈕更柔和 */
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 130px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-contact {
+            background-color: #2a7886; /* 主色：旅行藍綠 */
+            color: #ffffff;
+        }
+        .btn-line {
+            background-color: #4cbb17; /* LINE綠，低飽和更柔和 */
+            color: #ffffff;
+        }
+        /* 主要內容 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .content-wrapper {
+            padding: 2rem 0;
+        }
+        section {
+            margin-bottom: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.92); /* 卡片半透明，與背景呼應 */
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(240, 247, 255, 0.8);
+        }
+        section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: #2a7886;
+            border-left: 4px solid #82c3ec; /* 淺藍側邊線 */
+            padding-left: 1rem;
+            font-weight: 600;
+        }
+        /* 輪播相簿樣式 - 優化旅行風 */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 16/9; /* 統一圖片比例，整齊美觀 */
+        }
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #2a7886;
+            border: none;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 50%; /* 圓形按鈕更精致 */
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: #2a7886;
+            color: white;
+        }
+        .carousel-prev {
+            left: 15px;
+        }
+        .carousel-next {
+            right: 15px;
+        }
+        .carousel-dots {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #e0e9f0;
+            margin: 0 6px;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: #2a7886;
+            width: 25px;
+            border-radius: 5px; /* 激活點變長條，更直觀 */
+        }
+        /* 文字介紹 - 優化排版 */
+        .intro-text {
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 2;
+            text-align: justify;
+            padding: 0.5rem 0;
+        }
+        .intro-text p {
+            margin-bottom: 0.8rem;
+        }
+        /* 底部聯繫按鈕區 - 旅行風強化 */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(240, 247, 255, 0.95) 0%, rgba(232, 244, 248, 0.95) 100%); /* 漸變半透明 */
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            margin-top: 1rem;
+            border: none;
+        }
+        .contact-section h2 {
+            border: none;
+            text-align: center;
+            padding-left: 0;
+            margin-bottom: 1.8rem;
+            color: #2a7886;
+            font-size: 1.5rem;
+        }
+        .contact-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        /* 頁尾 - 簡約清爽 + 半透明 */
+        footer {
+            background-color: rgba(42, 120, 134, 0.95);
+            color: #ffffff;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 0;
+            font-size: 0.95rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 平板/電腦端樣式調整 */
+        @media (min-width: 768px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1.2rem 2rem;
+            }
+            .logo {
+                justify-content: flex-start;
+                width: auto;
+            }
+            .logo img {
+                height: 75px;
+            }
+            .logo h1 {
+                font-size: 1.8rem;
+                text-align: left;
+            }
+            .header-buttons {
+                width: auto;
+                justify-content: flex-end;
+            }
+            .btn {
+                padding: 0.8rem 1.6rem;
+                font-size: 1rem;
+                min-width: 140px;
+            }
+            main {
+                padding: 0 2rem;
+            }
+            .content-wrapper {
+                padding: 2.5rem 0;
+            }
+            section {
+                padding: 2.5rem 2rem;
+                margin-bottom: 3rem;
+            }
+            section h2 {
+                font-size: 1.6rem;
+                padding-left: 1.2rem;
+            }
+            .carousel-prev, .carousel-next {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+            .contact-section {
+                padding: 3rem 2rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+                padding: 1rem 0;
+            }
+        }
+
+        /* 大螢幕調整 */
+        @media (min-width: 1024px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 3rem 2.5rem;
+            }
+        }
+        /* 手機端特殊優化 - 保證背景和卡片顯示效果 */
+        @media (max-width: 767px) {
+            body {
+                background-attachment: scroll; /* 解決部分手機瀏覽器fixed背景兼容問題 */
+            }
+            body::before {
+                position: absolute;
+            }
+            .logo img {
+                height: 55px;
+            }
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            section {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://i.ibb.co/h1xBf54n/20260307160416-72-7-removebg-preview.png" alt="華勤租賃LOGO">
+            <h1>華勤租賃有限公司</h1>
+        </div>
+        <div class="header-buttons">
+            <a href="tel:+886928960083" class="btn btn-contact">立即聯絡</a>
+            <a href="https://lin.ee/A5WW0yK" class="btn btn-line">官方LINE@</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <!-- 第一個相簿：九人座輪播 -->
+            <section id="gallery1">
+                <h2>九人座</h2>
+                <div class="carousel-container" id="carousel1">
+                    <div class="carousel-slide" id="slide1">
+                        <img src="https://i.ibb.co/JRbYF3Gr/LINE-ALBUM-260308-2.jpg" alt="九人座車輛1">
+                        <img src="https://i.ibb.co/bgVJH5D7/LINE-ALBUM-260308-3.jpg" alt="九人座車輛2">
+                        <img src="https://i.ibb.co/tw8F68n6/LINE-ALBUM-260308-4.jpg" alt="九人座車輛3">
+                        <img src="https://i.ibb.co/YzyNjKx/LINE-ALBUM-260308-5.jpg" alt="九人座車輛4">
+                        <img src="https://i.ibb.co/Xf1mcqpv/LINE-ALBUM-260308-6.jpg" alt="九人座車輛5">
+                        <img src="https://i.ibb.co/v4zKFcN5/LINE-ALBUM-260308-7.jpg" alt="九人座車輛6">
+                        <img src="https://i.ibb.co/YFDCBypV/LINE-ALBUM-260308-8.jpg" alt="九人座車輛7">
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(1)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(1)">&#10095;</button>
+                    <div class="carousel-dots" id="dots1"></div>
+                </div>
+            </section>
+
+            <!-- 公司介紹 -->
+            <section id="intro">
+                <h2>公司介紹</h2>
+                <div class="intro-text">
+                    <p>華勤租賃有限公司</p>
+                    <br>
+                    <p>專業包車服務，一車滿足您所有出行需求。我們深耕接送與包車領域，堅守安全、舒適、迅速三大宗旨，為每一趟旅程把關。</p>
+                    <br>
+                    <p>機場接送準時可靠，免去等候與迷路煩惱；</p>
+                    <p>商務接洽尊榮穩重，打造專業高效出行體驗；</p>
+                    <p>旅遊包車自由彈性，隨心暢玩沿途風景；</p>
+                    <p>婚禮禮車氣派體面，為重要時刻加分添彩；</p>
+                    <p>婚紗攝影專車貼心，定格每一個浪漫瞬間。</p>
+                    <br>
+                    <p>從接送到長途包車，從商務到婚慶攝影，</p>
+                    <p>我們以嚴選車輛、專業駕駛、貼心服務，</p>
+                    <p>讓您出行更安心、乘坐更舒適、抵達更迅速。</p>
+                    <br>
+                    <p>用心服務每一趟行程，讓旅途輕鬆又放心。</p>
+                </div>
+            </section>
+
+            <!-- 第二個相簿：保母車八人座輪播 -->
+            <section id="gallery2">
+                <h2>保母車八人座</h2>
+                <div class="carousel-container" id="carousel2">
+                    <div class="carousel-slide" id="slide2">
+                        <img src="https://i.ibb.co/dswqnCGS/LINE-ALBUM-260308-2.jpg" alt="保母車八人座1">
+                        <img src="https://i.ibb.co/2TtVbp7/LINE-ALBUM-260308-3.jpg" alt="保母車八人座2">
+                        <img src="https://i.ibb.co/6Rn759VQ/LINE-ALBUM-260308-4.jpg" alt="保母車八人座3">
+                        <img src="https://i.ibb.co/YTkf9C8C/LINE-ALBUM-260308-5.jpg" alt="保母車八人座4">
+                        <img src="https://i.ibb.co/tpL6k1c2/LINE-ALBUM-260308-6.jpg" alt="保母車八人座5">
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(2)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(2)">&#10095;</button>
+                    <div class="carousel-dots" id="dots2"></div>
+                </div>
+            </section>
+
+            <!-- 第三個相簿：保母車&十人座輪播 -->
+            <section id="gallery3">
+                <h2>保母車&十人座</h2>
+                <div class="carousel-container" id="carousel3">
+                    <div class="carousel-slide" id="slide3">
+                        <img src="https://i.ibb.co/C5rDmGvb/LINE-ALBUM-260308-1.jpg" alt="保母車&十人座1">
+                        <img src="https://i.ibb.co/rKZ1FYJM/LINE-ALBUM-260308-2.jpg" alt="保母車&十人座2">
+                        <img src="https://i.ibb.co/XfKs9xNz/LINE-ALBUM-260308-3.jpg" alt="保母車&十人座3">
+                        <img src="https://i.ibb.co/TqBGstgS/LINE-ALBUM-260308-4.jpg" alt="保母車&十人座4">
+                        <img src="https://i.ibb.co/PsLZfDfk/LINE-ALBUM-260308-3.jpg" alt="保母車&十人座5">
+                        <img src="https://i.ibb.co/vCwVthJj/LINE-ALBUM-260308-5.jpg" alt="保母車&十人座6">
+                        <img src="https://i.ibb.co/jvxgHQTN/LINE-ALBUM-260308-6.jpg" alt="保母車&十人座7">
+                        <img src="https://i.ibb.co/hRHqNDyZ/LINE-ALBUM-260308-2.jpg" alt="保母車&十人座8">
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(3)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(3)">&#10095;</button>
+                    <div class="carousel-dots" id="dots3"></div>
+                </div>
+            </section>
+
+            <!-- 底部聯繫按鈕區 -->
+            <section class="contact-section">
+                <h2>立即聯繫我們，開啟美好旅程</h2>
+                <div class="contact-buttons">
+                    <a href="tel:+886928960083" class="btn btn-contact">聯絡我們</a>
+                    <a href="https://lin.ee/A5WW0yK" class="btn btn-line">官方LINE@</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 華勤租賃有限公司 版權所有 | 用心服務每一趟旅程</p>
+    </footer>
+
+    <script>
+        // 輪播狀態管理，支援三個輪播實例獨立控制
+        const carouselStates = {
+            1: { current: 0, interval: null },
+            2: { current: 0, interval: null },
+            3: { current: 0, interval: null }
+        };
+
+        // 初始化輪播
+        function initCarousel(carouselId) {
+            const slideEl = document.getElementById(`slide${carouselId}`);
+            const dotsEl = document.getElementById(`dots${carouselId}`);
+            const slides = slideEl.children;
+            const total = slides.length;
+
+            // 創建輪播點
+            dotsEl.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(carouselId, i);
+                dotsEl.appendChild(dot);
+            }
+
+            // 開啟自動輪播
+            startAutoPlay(carouselId);
+
+            // 滑鼠懸停暫停/離開恢復
+            const carouselEl = document.getElementById(`carousel${carouselId}`);
+            carouselEl.addEventListener('mouseenter', () => stopAutoPlay(carouselId));
+            carouselEl.addEventListener('mouseleave', () => startAutoPlay(carouselId));
+        }
+
+        // 更新輪播畫面
+        function updateCarousel(carouselId) {
+            const slideEl = document.getElementById(`slide${carouselId}`);
+            const dotsEl = document.getElementById(`dots${carouselId}`);
+            const slides = slideEl.children;
+            const total = slides.length;
+            const current = carouselStates[carouselId].current;
+
+            // 移動輪播
+            const slideWidth = 100 / total;
+            slideEl.style.transform = `translateX(-${current * slideWidth}%)`;
+
+            // 更新輪播點
+            const dots = dotsEl.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        }
+
+        // 下一張
+        function nextSlide(carouselId) {
+            const total = document.getElementById(`slide${carouselId}`).children.length;
+            carouselStates[carouselId].current = (carouselStates[carouselId].current + 1) % total;
+            updateCarousel(carouselId);
+        }
+
+        // 上一張
+        function prevSlide(carouselId) {
+            const total = document.getElementById(`slide${carouselId}`).children.length;
+            carouselStates[carouselId].current = (carouselStates[carouselId].current - 1 + total) % total;
+            updateCarousel(carouselId);
+        }
+
+        // 跳轉指定張
+        function goToSlide(carouselId, index) {
+            carouselStates[carouselId].current = index;
+            updateCarousel(carouselId);
+        }
+
+        // 開啟自動輪播（5秒一張）
+        function startAutoPlay(carouselId) {
+            stopAutoPlay(carouselId);
+            carouselStates[carouselId].interval = setInterval(() => {
+                nextSlide(carouselId);
+            }, 5000);
+        }
+
+        // 停止自動輪播
+        function stopAutoPlay(carouselId) {
+            if (carouselStates[carouselId].interval) {
+                clearInterval(carouselStates[carouselId].interval);
+                carouselStates[carouselId].interval = null;
+            }
+        }
+
+        // 頁面加載完成初始化所有輪播
+        window.onload = () => {
+            initCarousel(1);
+            initCarousel(2);
+            initCarousel(3);
+        };
+    </script>
+</body>
+</html>
